@@ -11,7 +11,7 @@ const getAllCourses = async (req, res) => {
     }
 };
 
-// [READ] Ambil satu kelas berdasarkan ID (Untuk halaman Detail Product)
+// [READ] Ambil satu kelas berdasarkan ID
 const getCourseById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -27,7 +27,7 @@ const getCourseById = async (req, res) => {
     }
 };
 
-// [CREATE] Tambah kelas baru (Dari Admin Dashboard)
+// [CREATE] Tambah kelas baru
 const createCourse = async (req, res) => {
     try {
         const { title, category, description, price, image, instructorName, instructorRole } = req.body;
@@ -44,7 +44,7 @@ const createCourse = async (req, res) => {
     }
 };
 
-// [UPDATE] Edit kelas (Dari Admin Dashboard)
+// [UPDATE] Edit kelas
 const updateCourse = async (req, res) => {
     try {
         const { id } = req.params;
@@ -67,7 +67,7 @@ const updateCourse = async (req, res) => {
     }
 };
 
-// [DELETE] Hapus kelas (Dari Admin Dashboard)
+// [DELETE] Hapus kelas
 const deleteCourse = async (req, res) => {
     try {
         const { id } = req.params;
