@@ -12,14 +12,19 @@ app.use(morgan('dev'));
 const courseRoutes = require('./routes/courseRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const bankRoutes = require('./routes/bankRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 
 app.use('/course', courseRoutes);
 app.use('/users', userRoutes);
 app.use('/orders', orderRoutes);
+app.use('/banks', bankRoutes);
+app.use('/upload', express.static('upload'));
+app.use('/upload', uploadRoutes);
 
 app.get('/', (req, res) => {
-    res.json({ message: "🚀 Backend VideoBelajar Menyala!" });
+    res.json({ message: "Backend VideoBelajar runiiing bossquee" });
 });
 
 app.use((req, res) => {

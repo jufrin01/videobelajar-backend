@@ -2,19 +2,23 @@ const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
 
-// [GET] Ambil semua kelas
+const { authenticateToken, authorizeAdmin } = require('../middleware/authMiddleware');
+
+// [GET] Ambil semua kelas -> PUBLIC (Siapa saja boleh lihat)
 router.get('/', courseController.getAllCourses);
 
-// [GET] Ambil 1 detail kelas berdasarkan ID
+// [GET] Ambil 1 detail kelas -> PUBLIC
 router.get('/:id', courseController.getCourseById);
 
-// [POST] Tambah kelas baru
-router.post('/', courseController.createCourse);
+// --- PROTECTED ROUTES (Hanya Admin) ---
 
-// [PUT] Update/Edit kelas
-router.put('/:id', courseController.updateCourse);
+// [POST] Tambah kelas baru -> Login + Admin Only
+router.post('/', authenticateToken, authorizeAdmin, courseController.createCourse);
 
-// [DELETE] Hapus kelas
-router.delete('/:id', courseController.deleteCourse);
+// [PUT] Update/Edit kelas -> Login + Admin Only
+router.put('/:id', authenticateToken, authorizeAdmin, courseController.updateCourse);
+
+// [DELETE] Hapus kelas -> Login + Admin Only
+router.delete('/:id', authenticateToken, authorizeAdmin, courseController.deleteCourse);
 
 module.exports = router;
