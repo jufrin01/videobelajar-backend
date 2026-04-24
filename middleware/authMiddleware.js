@@ -1,8 +1,7 @@
-// File: middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 
 const authenticateToken = (req, res, next) => {
-    // 1. Cek apakah ada token di header menggunakan req.headers.authorization
+
     const authHeader = req.headers['authorization'];
 
     // Format standar token adalah "Bearer <token>", jadi kita ambil bagian tokennya saja (index 1)
@@ -13,7 +12,6 @@ const authenticateToken = (req, res, next) => {
         return res.status(401).json({ error: 'Autentikasi gagal. Token tidak ditemukan.' });
     }
 
-    // 2. Mengecek validitas token menggunakan jwt.verify dan secretkey
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
         // Jika token tidak valid / sudah dimanipulasi / kadaluarsa
         if (err) {
@@ -29,8 +27,6 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// --- BONUS: Middleware Khusus Admin ---
-// Karena aplikasi Anda punya Dashboard Admin, kita tambahkan gembok ekstra
 const authorizeAdmin = (req, res, next) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ error: 'Akses ditolak. Endpoint ini hanya untuk Admin.' });
